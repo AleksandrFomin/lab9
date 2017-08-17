@@ -1,0 +1,67 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+  <title>Main page</title>
+</h:head>
+<h:body>
+    <div id="content">
+      <div id="left">
+        <p>Координата X
+        {{#bs-dropdown as |dd|}}
+          {{#dd.button}}{{xVal}}<span class="caret"></span>{{/dd.button}}
+          {{#dd.menu as |menu|}}
+            <span {{action 'setX' -5}}>{{#menu.item}} -5 {{/menu.item}}</span>
+            <span {{action 'setX' -4}}>{{#menu.item}} -4 {{/menu.item}}</span>
+            <span {{action 'setX' -3}}>{{#menu.item}} -3 {{/menu.item}}</span>
+            <span {{action 'setX' -2}}>{{#menu.item}} -2 {{/menu.item}}</span>
+            <span {{action 'setX' -1}}>{{#menu.item}} -1 {{/menu.item}}</span>
+            <span {{action 'setX' 0}}>{{#menu.item}} 0 {{/menu.item}}</span>
+            <span {{action 'setX' 1}}>{{#menu.item}} 1 {{/menu.item}}</span>
+            <span {{action 'setX' 2}}>{{#menu.item}} 2 {{/menu.item}}</span>
+            <span {{action 'setX' 3}}>{{#menu.item}} 3 {{/menu.item}}</span>
+          {{/dd.menu}}
+        {{/bs-dropdown}}
+        </p>
+        <p>Координата Y
+        {{input type="text" valueBinding="yVal"}}
+        </p>
+        <p>Радиус R
+        {{#bs-dropdown as |dd|}}
+          {{#dd.button}}{{rVal}}<span class="caret"></span>{{/dd.button}}
+          {{#dd.menu as |menu|}}
+            <span {{action 'setR' 1}}>{{#menu.item}} 1 {{/menu.item}}</span>
+            <span {{action 'setR' 2}}>{{#menu.item}} 2 {{/menu.item}}</span>
+            <span {{action 'setR' 3}}>{{#menu.item}} 3 {{/menu.item}}</span>
+          {{/dd.menu}}
+        {{/bs-dropdown}}
+        </p>
+        <p>
+          <button disabled={{isDisabled}} {{action "submitButton" xVal yVal rVal}} class="btn btn-primary">Check</button>
+        </p>
+      </div>
+      <div>
+        <img id="pic" class="img-thumbnail" width="400px" {{action "imgClick" on="click"}} src="data:image/jpg;base64,{{img}}">
+        <button class="btn btn-danger" {{action "clearButton"}}>Clear</button>
+        <button class="btn btn-success" {{action "exitButton"}}>Exit</button>
+      </div>
+      <table class="table table-bordered">
+        <tr>
+          <th>X</th>
+          <th>Y</th>
+          <th>R</th>
+          <th>isInside</th>
+        </tr>
+        {{#each points as |point|}}
+          <tr>
+            <td>{{point.x}}</td>
+            <td>{{point.y}}</td>
+            <td>{{point.r}}</td>
+            <td>{{point.inside}}</td>
+          </tr>
+        {{/each}}
+      </table>
+    </div>
+</h:body>
+</html>

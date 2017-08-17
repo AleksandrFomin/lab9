@@ -1,0 +1,55 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+  <title>Main page</title>
+</h:head>
+<h:body>
+  <div class="h4">
+    <div id="header">
+      <p>Фомин А.В.<br/>
+        Куликова Д.Д.<br/>
+        P3201<br/>
+        Вариант 1037</p>
+    </div>
+  </div>
+  {{#bs-tab as |tab|}}
+    {{#tab.pane title="Вход"}}
+      <table class="input-lg">
+        <tr>
+          <td>Login</td>
+          <td>{{input type="text" valueBinding="login"}}</td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>{{input type="password" valueBinding="password"}}</td>
+        </tr>
+        <tr>
+          <button disabled={{disableLogin}} {{action "btnLogin" login password}} class="btn btn-primary">OK</button>
+        </tr>
+      </table>
+    {{/tab.pane}}
+    {{#tab.pane title="Регистрация"}}
+      <table class="input-lg">
+        <tr>
+          <td>Login</td>
+          <td>{{input type="text" valueBinding="login"}}</td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>{{input type="password" valueBinding="password"}}</td>
+        </tr>
+        <tr>
+          <td>Repeat password</td>
+          <td>{{input type="password" valueBinding="repeated"}}</td>
+        </tr>
+        <tr>
+          <button class="btn btn-warning" disabled={{disableRegister}} {{action "btnRegister" login password}}>OK</button>
+        </tr>
+      </table>
+    {{/tab.pane}}
+  {{/bs-tab}}
+
+</h:body>
+</html>
