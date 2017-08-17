@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      >
+<h:head>
+    <title>Main page</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <script type="text/javascript">
+        function areaClick(mouseEvent) {
+            var pic = document.getElementById("graph");
+            var curR=document.getElementById("mainform:sliderRValue").innerHTML;
+            var xCoord =mouseEvent.offsetX-201;
+            var yCoord=203-mouseEvent.offsetY;
+            var xNew=Number(((curR*xCoord)/144).toFixed(2));
+            var yNew=Number(((curR*yCoord)/144).toFixed(2));
+            mx = document.getElementById("submit:mx");
+            mx.value = xNew;
+            my = document.getElementById("submit:my");
+            my.value = yNew;
+            //alert("mx="+xNew+"my="+yNew+"r="+curR);
+            document.getElementById("submit:button").onclick();
+        }
+    </script>
+</h:head>
+<h:body>
+    <div class="container">
+        <div id="header">
+            <p>Фомин А.В.<br/>
+                Куликова Д.Д.<br/>
+                P3201<br/>
+                Вариант 1027</p>
+        </div>
+        <div id="content">
+            <div id="left">
+                <h:form id="mainform">
+
+                        <p>Выберите координату X
+                            <ace:sliderEntry id="X" min="-40" max="40" value="#{input.x}"
+                                             showLabels="false" length="300px">
+                                <ace:ajax event="slideEnd" execute="@this" render="sliderXValue"></ace:ajax>
+                            </ace:sliderEntry>
+                            <h:outputText id="sliderXValue" value="#{input.x}"></h:outputText>
+                        </p>
+
+
+                    <p>Введите координату Y</p>
+                    <p>
+                        <h:inputText id="Y" value="#{input.y}" required="true"
+                                     requiredMessage="No value!" validatorMessage="Out of range!">
+                            <f:validateDoubleRange minimum="-5.0" maximum="5.0" for="Y"/>
+                        </h:inputText>
+                        <h:message for="Y" id="msg" style="color: red;"/>
+                    </p>
+
+
+                        <p>Выберите радиус R:
+                            <ace:sliderEntry id="R" min="10" max="40" value="#{input.r}"
+                                             showLabels="false" length="300px">
+                                <ace:ajax event="slideEnd" execute="R" render="sliderRValue"></ace:ajax>
+                            </ace:sliderEntry>
+                            <h:outputText id="sliderRValue" value="#{input.r}"></h:outputText>
+                        </p>
+
+
+                    <h:commandButton value="Добавить" action="#{areaChecker.submitHandler()}">
+                        <f:ajax execute="X Y" render=":panelTable :graph msg"/>
+                    </h:commandButton>
+                    <h:commandButton value="Очистить" action="#{areaChecker.reset}">
+                        <f:ajax render=":panelTable :graph"/>
+                    </h:commandButton>
+                    <h:commandButton value="To Start page!" action="index"/>
+                </h:form>
+
+                <h:panelGroup id="panelTable">
+                    <h:dataTable id="resultTable" value="#{areaChecker.points}" var="p">
+                        <h:column>
+                            <f:facet name="header">X</f:facet>
+                            #{p.x}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Y</f:facet>
+                            #{p.y}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">R</f:facet>
+                            #{p.r}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Вхождение</f:facet>
+                            #{p.inside}
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+
+            </div>
+            <div id="right">
+                <h:graphicImage width="400px" url="data:image/jpg;base64,#{areaChecker.img}" id="graph"
+                onclick="areaClick(event)">
+                </h:graphicImage>
+                <h:form id="submit" style="display: none;">
+                    <h:inputHidden id="mx" value="#{areaChecker.mx}"/>
+                    <h:inputHidden id="my" value="#{areaChecker.my}"/>
+                    <h:commandButton id="button" action="#{areaChecker.clickListener()}">
+                        <f:ajax execute="mx my" render=":graph :panelTable"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

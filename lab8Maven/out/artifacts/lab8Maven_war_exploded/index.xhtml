@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+   <title>Start page</title>
+   <link rel="stylesheet" href="style.css"></link>
+</h:head>
+<h:body>
+   <div id="container">
+      <div id="header">
+         <p>Фомин А.В.<br/>
+            Куликова Д.Д.<br/>
+            P3201<br/>
+            Вариант 1027</p>
+      </div>
+      <div id="content">
+         Лабораторная работа №8<br/>
+         Date/time
+         <div id='datetime'>
+            <script type="text/javascript">
+                dateContainer = document.getElementById('datetime');
+                updateTime();
+                function updateTime() {
+                    curDateTime = new Date().toLocaleString();
+                    dateContainer.innerHTML = curDateTime;
+                    setTimeout('updateTime()', 6000);
+                }
+            </script>
+         </div>
+         <div class="changeLocation">
+            <h:form>
+               <h:commandLink action="main">To main page</h:commandLink>
+            </h:form>
+         </div>
+      </div>
+   </div>
+</h:body>
+</html>
