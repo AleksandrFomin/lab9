@@ -1,0 +1,62 @@
+table{
+
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 2px solid gray;
+    text-align:center;
+}
+
+#header > p {
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.cur {
+    font-style: italic;
+}
+
+#container{
+    background: #FFFFFF;
+    margin: 30px auto;
+    width: 100%;
+    height: 1000px;
+}
+
+#left{
+    float:left;
+    width: 50%;
+}
+
+#right{
+    float:right;
+    width: 50%;
+}
+
+#Xblock > INPUT {
+    width: 40px;
+}
+
+FIELDSET, #submit {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#header {
+    background: #488183;
+    height: 100px;
+    width: 100%;
+    font-size: 24px;
+}
+
+#content {
+    background: #bfd2b5;
+    float: right;
+    width: 100%;
+    height: 900px;
+}
+
+.x {
+    padding-right: 14px;
+}

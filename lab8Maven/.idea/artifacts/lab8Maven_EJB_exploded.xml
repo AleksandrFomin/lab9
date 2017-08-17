@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ejb" name="lab8Maven:EJB exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/lab8Maven_EJB_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="lab8Maven/ejb/EJB" />
+      <element id="module-output" name="lab8Maven" />
+    </root>
+  </artifact>
+</component>
